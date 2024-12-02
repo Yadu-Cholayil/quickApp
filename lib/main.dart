@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:parse_server_sdk/parse_server_sdk.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
+import 'package:quick_task/repository/main_repo.dart';
 
-const String PARSE_APP_ID = 'eqJQGZXIuclhvWtcEAMqa0JgpUyOu8DN67EawPWa';
-const keyClientKey = '7tl4bGVyPRz2LGvXsYZGHyyRPFfKA3g1tGYUVtkc';
-const String PARSE_APP_URL = 'https://parseapi.back4app.com';
-const String MASTER_KEY = 'NwOZvEUfcm6CPEssEvvcj13ETlRhPdBvyRFASuU8';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Parse().initialize(
-    PARSE_APP_ID,
-    PARSE_APP_URL,
-    masterKey: MASTER_KEY,  
-    autoSendSessionId: true,
-    debug: true,
-    coreStore: await CoreStoreSharedPreferences.getInstance(),
-  );
+  // Parse().initialize(
+  //   PARSE_APP_ID,
+  //   PARSE_APP_URL,
+  //   masterKey: MASTER_KEY,
+  //   autoSendSessionId: true,
+  //   debug: true,
+  //   coreStore: await CoreStoreSharedPreferences.getInstance(),
+  // );
   runApp(const MyApp());
 }
 
@@ -90,7 +84,7 @@ class _LoginPageState extends State<LoginCard> {
     // final user = ParseUser(email, password, null);
 
     try {
-      var response = await user.login();
+      var response = MainRepoImpl().userLogin();
 
       if (response.success) {
         showSuccess("User was successfully logged in!");
